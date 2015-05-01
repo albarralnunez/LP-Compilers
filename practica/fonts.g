@@ -123,5 +123,46 @@ int main() {
 
 #token SPACE "[\ \n]" << zzskip();>>
 
-fonts: defs PLAYFONT! play <<#0=createASTlist(_sibling);>>;
+//tokens
+#token COM      "\,"
+#token PAROP    "\("
+#token PARCL    "\)"
+#token FONTOP   "\["
+#token FONTCL   "\]"
+#token ASS      "="
+#token ARE      "area"
+#token ALT      "altu"
+#token ADD	    "\|"
+#token ADDRL    "\\"
+#token ADDRR	"\/"
+#token PLUS	    "\+"
+#token MUL	    "\*"
+#token INT	    "[0-9]+"
+#token VAR      "(['a'-'z'] | ['A'-'Z']) (['a'-'z'] | ['A'-'Z'] | ['0'-'9'] | '_')*"
+#token BL       "blau"
+#token VERM     "vermell"
+#token GR       "groc"
+#token VERD     "verd"
+#token ON       "on"
+#token OFF      "off"
 
+play : (INT (ON | OFF) VAR)* <<#0=createASTlist(_sibling);>>;
+
+color           : BL
+                | VERM
+                | GR
+                | VERD;
+
+inst            : ARE^
+                | ALT^;
+
+exprp           : exprop (PLUS^ exprop)*;
+exprop          : exprmu (ADD^ exprmu | ADDRL^ exprmu | ADDRR^ exprmu)*;
+exprmu          : value (MUL^ value)*;
+
+font            : FONTOP INT COM INT COM color FONTCL;
+value           : (font | PAROP! VAR PARCL!);
+
+defs: ((ARE^ | ALT^  | VAR ASS^) exprp)* <<#0=createASTlist(_sibling);>>;
+
+fonts: defs PLAYFONT! play <<#0=createASTlist(_sibling);>>;
