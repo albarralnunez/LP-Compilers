@@ -153,13 +153,12 @@ font            : FONTOP^ INT COM! INT COM! color FONTCL!;
 
 literal         : font | VAR;
 
-var             : literal | term20;
-
 //First dig. represents Term group, second dig. the lvl of priority
-term20          : INT (MUL^ var)*;
-term11          : var ((ADD^ | ADDRL^ | ADDRR^) var)*;
-term10          : term11 (PLUS^ term11)*;
-expr            : term10;
+term2           : INT (MUL^ PAROP!? literal PARCL!?)*; //TEST PARE
+term1           : literal ((ADD^ | ADDRL^ | ADDRR^) PAROP!? literal PARCL!?)*; //TEST PARE
+var             : term1 | term2;
+expr            : var (PLUS^ var)*;
+
 
 defs            : ((VAR ASS^ expr)
                 | (ALT^ expr)

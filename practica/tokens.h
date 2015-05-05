@@ -52,27 +52,21 @@ extern void literal();
 #endif
 
 #ifdef __USE_PROTOS
+void term2(AST**_root);
+#else
+extern void term2();
+#endif
+
+#ifdef __USE_PROTOS
+void term1(AST**_root);
+#else
+extern void term1();
+#endif
+
+#ifdef __USE_PROTOS
 void var(AST**_root);
 #else
 extern void var();
-#endif
-
-#ifdef __USE_PROTOS
-void term20(AST**_root);
-#else
-extern void term20();
-#endif
-
-#ifdef __USE_PROTOS
-void term11(AST**_root);
-#else
-extern void term11();
-#endif
-
-#ifdef __USE_PROTOS
-void term10(AST**_root);
-#else
-extern void term10();
 #endif
 
 #ifdef __USE_PROTOS
