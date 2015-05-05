@@ -63,11 +63,6 @@ zzerraction()
 		NLA = 1;
 	>>
 
-play
-	<<
-		NLA = PLAYFONT;
-	>>
-
 [\ \n]
 	<<
 		NLA = SPACE;
@@ -104,16 +99,6 @@ play
 		NLA = ASS;
 	>>
 
-area
-	<<
-		NLA = ARE;
-	>>
-
-altu
-	<<
-		NLA = ALT;
-	>>
-
 \|
 	<<
 		NLA = ADD;
@@ -124,7 +109,7 @@ altu
 		NLA = ADDRL;
 	>>
 
-\/
+/
 	<<
 		NLA = ADDRR;
 	>>
@@ -144,9 +129,19 @@ altu
 		NLA = INT;
 	>>
 
-(['a'-'z'] | ['A'-'Z']) (['a'-'z'] | ['A'-'Z'] | ['0'-'9'] | '_')*
+play
 	<<
-		NLA = VAR;
+		NLA = PLAYFONT;
+	>>
+
+area
+	<<
+		NLA = ARE;
+	>>
+
+altu
+	<<
+		NLA = ALT;
 	>>
 
 blau
@@ -177,6 +172,11 @@ on
 off
 	<<
 		NLA = OFF;
+	>>
+
+[a-zA-Z]+[0-9]*
+	<<
+		NLA = VAR;
 	>>
 
 %%

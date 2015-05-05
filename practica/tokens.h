@@ -9,29 +9,41 @@
  * ANTLR Version 1.33MR33
  */
 #define zzEOF_TOKEN 1
-#define PLAYFONT 2
-#define SPACE 3
-#define COM 4
-#define PAROP 5
-#define PARCL 6
-#define FONTOP 7
-#define FONTCL 8
-#define ASS 9
-#define ARE 10
-#define ALT 11
-#define ADD 12
-#define ADDRL 13
-#define ADDRR 14
-#define PLUS 15
-#define MUL 16
-#define INT 17
-#define VAR 18
-#define BL 19
-#define VERM 20
-#define GR 21
-#define VERD 22
-#define ON 23
-#define OFF 24
+#define SPACE 2
+#define COM 3
+#define PAROP 4
+#define PARCL 5
+#define FONTOP 6
+#define FONTCL 7
+#define ASS 8
+#define ADD 9
+#define ADDRL 10
+#define ADDRR 11
+#define PLUS 12
+#define MUL 13
+#define INT 14
+#define PLAYFONT 15
+#define ARE 16
+#define ALT 17
+#define BL 18
+#define VERM 19
+#define GR 20
+#define VERD 21
+#define ON 22
+#define OFF 23
+#define VAR 24
+
+#ifdef __USE_PROTOS
+void fonts(AST**_root);
+#else
+extern void fonts();
+#endif
+
+#ifdef __USE_PROTOS
+void defs(AST**_root);
+#else
+extern void defs();
+#endif
 
 #ifdef __USE_PROTOS
 void play(AST**_root);
@@ -79,18 +91,6 @@ extern void font();
 void value(AST**_root);
 #else
 extern void value();
-#endif
-
-#ifdef __USE_PROTOS
-void defs(AST**_root);
-#else
-extern void defs();
-#endif
-
-#ifdef __USE_PROTOS
-void fonts(AST**_root);
-#else
-extern void fonts();
 #endif
 
 #endif

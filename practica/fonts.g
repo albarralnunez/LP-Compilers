@@ -119,32 +119,34 @@ int main() {
 >>
 
 #lexclass START
-#token PLAYFONT "play"
-
-#token SPACE "[\ \n]" << zzskip();>>
-
-//tokens
+#token SPACE    "[\ \n]" << zzskip();>>
 #token COM      "\,"
 #token PAROP    "\("
 #token PARCL    "\)"
 #token FONTOP   "\["
 #token FONTCL   "\]"
 #token ASS      "="
-#token ARE      "area"
-#token ALT      "altu"
 #token ADD	    "\|"
 #token ADDRL    "\\"
-#token ADDRR	"\/"
+#token ADDRR	"/"
 #token PLUS	    "\+"
 #token MUL	    "\*"
 #token INT	    "[0-9]+"
-#token VAR      "(['a'-'z'] | ['A'-'Z']) (['a'-'z'] | ['A'-'Z'] | ['0'-'9'] | '_')*"
+#token PLAYFONT "play"
+#token ARE      "area"
+#token ALT      "altu"
 #token BL       "blau"
 #token VERM     "vermell"
 #token GR       "groc"
 #token VERD     "verd"
 #token ON       "on"
 #token OFF      "off"
+#token VAR      "[a-zA-Z]+[0-9]*"
+
+
+fonts: defs PLAYFONT! play <<#0=createASTlist(_sibling);>>;
+
+defs: (/*(ARE^ | ALT^  | */VAR ASS^ (exprp |  value))* <<#0=createASTlist(_sibling);>>;
 
 play : (INT (ON | OFF) VAR)* <<#0=createASTlist(_sibling);>>;
 
@@ -156,13 +158,9 @@ color           : BL
 inst            : ARE^
                 | ALT^;
 
-exprp           : exprop (PLUS^ exprop)*;
+exprp           : exprop (PLUS^  PAROP! exprop PARCL!)*;
 exprop          : exprmu (ADD^ exprmu | ADDRL^ exprmu | ADDRR^ exprmu)*;
-exprmu          : value (MUL^ value)*;
+exprmu          : INT (MUL^ value)*;
 
-font            : FONTOP INT COM INT COM color FONTCL;
-value           : (font | PAROP! VAR PARCL!);
-
-defs: ((ARE^ | ALT^  | VAR ASS^) exprp)* <<#0=createASTlist(_sibling);>>;
-
-fonts: defs PLAYFONT! play <<#0=createASTlist(_sibling);>>;
+font            : FONTOP INT COM! INT COM! color FONTCL!;
+value           : font | VAR;
