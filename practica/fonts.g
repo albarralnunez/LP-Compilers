@@ -143,6 +143,25 @@ int main() {
 #token OFF      "off"
 #token VAR      "[a-zA-Z]+[0-9]*"
 
+fonts           : defs PLAYFONT! play <<#0=createASTlist(_sibling);>>;
+
+play            : (instrPl)* <<#0=createASTlist(_sibling);>>;
+
+defs            : (instDef)* <<#0=createASTlist(_sibling);>>;
+
+instDef         : (VAR ASS^ expr)
+                | (ALT^ expr) 
+                | (ARE^ expr);
+
+instrPl         : (INT (ON^ | OFF^) VAR);
+
+
+//First dig. represents Term group, second dig. the lvl of priority
+term2           : INT (MUL^ literal)*; //TEST PARE
+term1           : literal ((ADD^ | ADDRL^ | ADDRR^) literal)*; //TEST PARE
+var             : term1 | term2;
+expr            : var (PLUS^ var)*;
+
 
 color           : BL
                 | VERM
@@ -153,17 +172,3 @@ font            : FONTOP^ INT COM! INT COM! color FONTCL!;
 
 literal         : font | VAR;
 
-//First dig. represents Term group, second dig. the lvl of priority
-term2           : INT (MUL^ PAROP!? literal PARCL!?)*; //TEST PARE
-term1           : literal ((ADD^ | ADDRL^ | ADDRR^) PAROP!? literal PARCL!?)*; //TEST PARE
-var             : term1 | term2;
-expr            : var (PLUS^ var)*;
-
-
-defs            : ((VAR ASS^ expr)
-                | (ALT^ expr)
-                | (ARE^ expr))* <<#0=createASTlist(_sibling);>>;
-
-play            : (INT (ON^ | OFF^) VAR)* <<#0=createASTlist(_sibling);>>;
-
-fonts           : defs PLAYFONT! play <<#0=createASTlist(_sibling);>>;

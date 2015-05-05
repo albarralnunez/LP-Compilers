@@ -34,21 +34,33 @@
 #define VAR 24
 
 #ifdef __USE_PROTOS
-void color(AST**_root);
+void fonts(AST**_root);
 #else
-extern void color();
+extern void fonts();
 #endif
 
 #ifdef __USE_PROTOS
-void font(AST**_root);
+void play(AST**_root);
 #else
-extern void font();
+extern void play();
 #endif
 
 #ifdef __USE_PROTOS
-void literal(AST**_root);
+void defs(AST**_root);
 #else
-extern void literal();
+extern void defs();
+#endif
+
+#ifdef __USE_PROTOS
+void instDef(AST**_root);
+#else
+extern void instDef();
+#endif
+
+#ifdef __USE_PROTOS
+void instrPl(AST**_root);
+#else
+extern void instrPl();
 #endif
 
 #ifdef __USE_PROTOS
@@ -76,28 +88,29 @@ extern void expr();
 #endif
 
 #ifdef __USE_PROTOS
-void defs(AST**_root);
+void color(AST**_root);
 #else
-extern void defs();
+extern void color();
 #endif
 
 #ifdef __USE_PROTOS
-void play(AST**_root);
+void font(AST**_root);
 #else
-extern void play();
+extern void font();
 #endif
 
 #ifdef __USE_PROTOS
-void fonts(AST**_root);
+void literal(AST**_root);
 #else
-extern void fonts();
+extern void literal();
 #endif
 
 #endif
 extern SetWordType zzerr1[];
 extern SetWordType zzerr2[];
 extern SetWordType zzerr3[];
-extern SetWordType zzerr4[];
 extern SetWordType setwd1[];
+extern SetWordType zzerr4[];
 extern SetWordType zzerr5[];
+extern SetWordType zzerr6[];
 extern SetWordType setwd2[];
