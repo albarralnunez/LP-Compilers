@@ -118,31 +118,31 @@ static void act8()
 
 static void act9()
 { 
-		NLA = ADD;
+		NLA = MUL;
 	}
 
 
 static void act10()
 { 
-		NLA = ADDRL;
+		NLA = PLUS;
 	}
 
 
 static void act11()
 { 
-		NLA = ADDRR;
+		NLA = ADD;
 	}
 
 
 static void act12()
 { 
-		NLA = PLUS;
+		NLA = ADDRL;
 	}
 
 
 static void act13()
 { 
-		NLA = MUL;
+		NLA = ADDRR;
 	}
 
 
@@ -1660,9 +1660,9 @@ DfaState *dfa[48] = {
 
 
 DfaState accepts[49] = {
-  0, 1, 2, 4, 5, 13, 12, 3, 11, 14, 
-  8, 24, 24, 24, 24, 24, 24, 24, 6, 10, 
-  7, 9, 24, 24, 24, 24, 24, 24, 22, 24, 
+  0, 1, 2, 4, 5, 9, 10, 3, 13, 14, 
+  8, 24, 24, 24, 24, 24, 24, 24, 6, 12, 
+  7, 11, 24, 24, 24, 24, 24, 24, 22, 24, 
   24, 24, 24, 24, 24, 23, 24, 24, 17, 16, 
   18, 20, 15, 21, 24, 24, 24, 19, 0
 };

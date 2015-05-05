@@ -126,11 +126,11 @@ int main() {
 #token FONTOP   "\["
 #token FONTCL   "\]"
 #token ASS      "\="
+#token MUL	    "\*"
+#token PLUS	    "\+"
 #token ADD	    "\|"
 #token ADDRL    "\\"
-#token ADDRR	"/"
-#token PLUS	    "\+"
-#token MUL	    "\*"
+#token ADDRR	"\/"
 #token INT	    "[0-9]+"
 #token PLAYFONT "PLAY"
 #token ARE      "area"
@@ -155,13 +155,15 @@ instDef         : (VAR ASS^ expr)
 
 instrPl         : (INT (ON^ | OFF^) VAR);
 
+literal         : font | VAR;
 
 //First dig. represents Term group, second dig. the lvl of priority
+term2p          : INT (MUL^ var|); //TEST PARE
+term1p          : literal ((ADDRL^ | ADDRR^| ADD^) var|); //TEST PARE
 term2           : INT (MUL^ literal)*; //TEST PARE
-term1           : literal ((ADD^ | ADDRL^ | ADDRR^) literal)*; //TEST PARE
-var             : term1 | term2;
+term1           : literal ((ADDRL^ | ADDRR^| ADD^) literal)*; //TEST PARE
+var             : (PAROP! (term1 | term2) PARCL!) | (term1p | term2p);
 expr            : var (PLUS^ var)*;
-
 
 color           : BL
                 | VERM
@@ -169,6 +171,3 @@ color           : BL
                 | VERD;
 
 font            : FONTOP^ INT COM! INT COM! color FONTCL!;
-
-literal         : font | VAR;
-

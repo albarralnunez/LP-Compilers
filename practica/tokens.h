@@ -16,11 +16,11 @@
 #define FONTOP 6
 #define FONTCL 7
 #define ASS 8
-#define ADD 9
-#define ADDRL 10
-#define ADDRR 11
-#define PLUS 12
-#define MUL 13
+#define MUL 9
+#define PLUS 10
+#define ADD 11
+#define ADDRL 12
+#define ADDRR 13
 #define INT 14
 #define PLAYFONT 15
 #define ARE 16
@@ -64,6 +64,24 @@ extern void instrPl();
 #endif
 
 #ifdef __USE_PROTOS
+void literal(AST**_root);
+#else
+extern void literal();
+#endif
+
+#ifdef __USE_PROTOS
+void term2p(AST**_root);
+#else
+extern void term2p();
+#endif
+
+#ifdef __USE_PROTOS
+void term1p(AST**_root);
+#else
+extern void term1p();
+#endif
+
+#ifdef __USE_PROTOS
 void term2(AST**_root);
 #else
 extern void term2();
@@ -99,18 +117,18 @@ void font(AST**_root);
 extern void font();
 #endif
 
-#ifdef __USE_PROTOS
-void literal(AST**_root);
-#else
-extern void literal();
-#endif
-
 #endif
 extern SetWordType zzerr1[];
 extern SetWordType zzerr2[];
 extern SetWordType zzerr3[];
-extern SetWordType setwd1[];
 extern SetWordType zzerr4[];
+extern SetWordType setwd1[];
 extern SetWordType zzerr5[];
 extern SetWordType zzerr6[];
+extern SetWordType zzerr7[];
+extern SetWordType zzerr8[];
 extern SetWordType setwd2[];
+extern SetWordType zzerr9[];
+extern SetWordType zzerr10[];
+extern SetWordType zzerr11[];
+extern SetWordType setwd3[];

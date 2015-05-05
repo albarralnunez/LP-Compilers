@@ -99,6 +99,16 @@ zzerraction()
 		NLA = ASS;
 	>>
 
+\*
+	<<
+		NLA = MUL;
+	>>
+
+\+
+	<<
+		NLA = PLUS;
+	>>
+
 \|
 	<<
 		NLA = ADD;
@@ -109,19 +119,9 @@ zzerraction()
 		NLA = ADDRL;
 	>>
 
-/
+\/
 	<<
 		NLA = ADDRR;
-	>>
-
-\+
-	<<
-		NLA = PLUS;
-	>>
-
-\*
-	<<
-		NLA = MUL;
 	>>
 
 [0-9]+
