@@ -1,3 +1,5 @@
 F1 = [10,3,blau]
-play
+F2 = F1 / [10,10,groc] | [3,1,vermell]
+F3 = F1 + 2*F2
+PLAY
 0 on F1

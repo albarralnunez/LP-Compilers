@@ -34,9 +34,51 @@
 #define VAR 24
 
 #ifdef __USE_PROTOS
-void fonts(AST**_root);
+void color(AST**_root);
 #else
-extern void fonts();
+extern void color();
+#endif
+
+#ifdef __USE_PROTOS
+void font(AST**_root);
+#else
+extern void font();
+#endif
+
+#ifdef __USE_PROTOS
+void literal(AST**_root);
+#else
+extern void literal();
+#endif
+
+#ifdef __USE_PROTOS
+void var(AST**_root);
+#else
+extern void var();
+#endif
+
+#ifdef __USE_PROTOS
+void term20(AST**_root);
+#else
+extern void term20();
+#endif
+
+#ifdef __USE_PROTOS
+void term11(AST**_root);
+#else
+extern void term11();
+#endif
+
+#ifdef __USE_PROTOS
+void term10(AST**_root);
+#else
+extern void term10();
+#endif
+
+#ifdef __USE_PROTOS
+void expr(AST**_root);
+#else
+extern void expr();
 #endif
 
 #ifdef __USE_PROTOS
@@ -52,45 +94,9 @@ extern void play();
 #endif
 
 #ifdef __USE_PROTOS
-void color(AST**_root);
+void fonts(AST**_root);
 #else
-extern void color();
-#endif
-
-#ifdef __USE_PROTOS
-void inst(AST**_root);
-#else
-extern void inst();
-#endif
-
-#ifdef __USE_PROTOS
-void exprp(AST**_root);
-#else
-extern void exprp();
-#endif
-
-#ifdef __USE_PROTOS
-void exprop(AST**_root);
-#else
-extern void exprop();
-#endif
-
-#ifdef __USE_PROTOS
-void exprmu(AST**_root);
-#else
-extern void exprmu();
-#endif
-
-#ifdef __USE_PROTOS
-void font(AST**_root);
-#else
-extern void font();
-#endif
-
-#ifdef __USE_PROTOS
-void value(AST**_root);
-#else
-extern void value();
+extern void fonts();
 #endif
 
 #endif

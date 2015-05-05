@@ -125,14 +125,14 @@ int main() {
 #token PARCL    "\)"
 #token FONTOP   "\["
 #token FONTCL   "\]"
-#token ASS      "="
+#token ASS      "\="
 #token ADD	    "\|"
 #token ADDRL    "\\"
 #token ADDRR	"/"
 #token PLUS	    "\+"
 #token MUL	    "\*"
 #token INT	    "[0-9]+"
-#token PLAYFONT "play"
+#token PLAYFONT "PLAY"
 #token ARE      "area"
 #token ALT      "altu"
 #token BL       "blau"
@@ -144,23 +144,27 @@ int main() {
 #token VAR      "[a-zA-Z]+[0-9]*"
 
 
-fonts: defs PLAYFONT! play <<#0=createASTlist(_sibling);>>;
-
-defs: (/*(ARE^ | ALT^  | */VAR ASS^ (exprp |  value))* <<#0=createASTlist(_sibling);>>;
-
-play : (INT (ON | OFF) VAR)* <<#0=createASTlist(_sibling);>>;
-
 color           : BL
                 | VERM
                 | GR
                 | VERD;
 
-inst            : ARE^
-                | ALT^;
+font            : FONTOP^ INT COM! INT COM! color FONTCL!;
 
-exprp           : exprop (PLUS^  PAROP! exprop PARCL!)*;
-exprop          : exprmu (ADD^ exprmu | ADDRL^ exprmu | ADDRR^ exprmu)*;
-exprmu          : INT (MUL^ value)*;
+literal         : font | VAR;
 
-font            : FONTOP INT COM! INT COM! color FONTCL!;
-value           : font | VAR;
+var             : literal | term20;
+
+//First dig. represents Term group, second dig. the lvl of priority
+term20          : INT (MUL^ var)*;
+term11          : var ((ADD^ | ADDRL^ | ADDRR^) var)*;
+term10          : term11 (PLUS^ term11)*;
+expr            : term10;
+
+defs            : ((VAR ASS^ expr)
+                | (ALT^ expr)
+                | (ARE^ expr))* <<#0=createASTlist(_sibling);>>;
+
+play            : (INT (ON^ | OFF^) VAR)* <<#0=createASTlist(_sibling);>>;
+
+fonts           : defs PLAYFONT! play <<#0=createASTlist(_sibling);>>;

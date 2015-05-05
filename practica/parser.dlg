@@ -94,7 +94,7 @@ zzerraction()
 		NLA = FONTCL;
 	>>
 
-=
+\=
 	<<
 		NLA = ASS;
 	>>
@@ -129,7 +129,7 @@ zzerraction()
 		NLA = INT;
 	>>
 
-play
+PLAY
 	<<
 		NLA = PLAYFONT;
 	>>
