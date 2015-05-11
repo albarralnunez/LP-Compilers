@@ -6,6 +6,7 @@ F5 = F2 + 2*(F3 | F1)
 area F5
 area F3 \ [30,40,blau]
 altu F2 + F3 + F4 
+altu [30,40,blau ] / [30,110,blau] \ [30,100,blau]
 PLAY
 0 on F1
 5 on F2 

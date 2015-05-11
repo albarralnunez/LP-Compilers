@@ -16,6 +16,12 @@
 #include <string>
 #include <iostream>
 #include <map>
+#include <vector>
+#include <stack>
+#include <sstream>
+#include <stdexcept>
+#include <algorithm>
+
 using namespace std;
 
 const double PI  =3.141592653589793238463;
@@ -24,13 +30,14 @@ const double PI  =3.141592653589793238463;
 typedef struct {
   string kind;
   string text;
+  int type;
 } Attrib;
 
 // function to fill token information (predeclaration)
 void zzcr_attr(Attrib *attr, int type, char *text);
 
 // fields for AST nodes
-#define AST_FIELDS string kind; string text;
+#define AST_FIELDS string kind; string text; int type;
 #include "ast.h"
 
 // macro to create a new AST node (and function predeclaration)

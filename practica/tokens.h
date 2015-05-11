@@ -70,18 +70,6 @@ extern void literal();
 #endif
 
 #ifdef __USE_PROTOS
-void term2p(AST**_root);
-#else
-extern void term2p();
-#endif
-
-#ifdef __USE_PROTOS
-void term1p(AST**_root);
-#else
-extern void term1p();
-#endif
-
-#ifdef __USE_PROTOS
 void term2(AST**_root);
 #else
 extern void term2();
@@ -94,15 +82,15 @@ extern void term1();
 #endif
 
 #ifdef __USE_PROTOS
-void var(AST**_root);
-#else
-extern void var();
-#endif
-
-#ifdef __USE_PROTOS
 void expr(AST**_root);
 #else
 extern void expr();
+#endif
+
+#ifdef __USE_PROTOS
+void var(AST**_root);
+#else
+extern void var();
 #endif
 
 #ifdef __USE_PROTOS
@@ -121,14 +109,8 @@ extern void font();
 extern SetWordType zzerr1[];
 extern SetWordType zzerr2[];
 extern SetWordType zzerr3[];
-extern SetWordType zzerr4[];
 extern SetWordType setwd1[];
+extern SetWordType zzerr4[];
 extern SetWordType zzerr5[];
 extern SetWordType zzerr6[];
-extern SetWordType zzerr7[];
-extern SetWordType zzerr8[];
 extern SetWordType setwd2[];
-extern SetWordType zzerr9[];
-extern SetWordType zzerr10[];
-extern SetWordType zzerr11[];
-extern SetWordType setwd3[];
