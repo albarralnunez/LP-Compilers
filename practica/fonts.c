@@ -150,12 +150,14 @@ void ASTPrint(AST *a)
 }
 
 //global stack, almacena los angulos
-stack<double> ang;
+vector<double> ang;
 
-void add_inclination (double n_ang){
-  double act_ang = ang.top();
-  if (n_ang != act_ang) ang.push(act_ang+n_ang);
-  else ang.push(act_ang);
+double getAng() {
+  double res = ang[ang.size()-1];
+  for (int i = ang.size()-2; i >= 0; i--){
+    if (res != ang[i]) res += ang[i];  
+  }
+  return res;
 }
 
 double calcArea(AST *a, double fac) {
@@ -167,16 +169,14 @@ double calcArea(AST *a, double fac) {
     return calcArea(a->down, fac) + calcArea(a->down->right, fac);
   }
   else if (a->kind == "\\") {
-    add_inclination (-45);
     double aux1 = calcArea(a->down, fac);
-    ang.pop();
+    ang.push_back(-45);
     double aux2 = calcArea(a->down->right, fac);
     return aux1+aux2;
   }
   else if(a->kind == "/") {
-    add_inclination (45);
     double aux1 = calcArea(a->down, fac);
-    ang.pop();
+    ang.push_back(45);
     double aux2 = calcArea(a->down->right, fac);
     return aux1+aux2;
   }
@@ -185,9 +185,11 @@ double calcArea(AST *a, double fac) {
   }
   // else if (a->kind == "[") {
     //usar fac en la altura
-    return (ang.top() == 0) 
-    ? atof(a->down->kind.c_str())
-    : atof(a->down->kind.c_str());
+    double h = atof(a->down->right->kind.c_str());
+    double r = atof(a->down->kind.c_str());
+    return (getAng() == 0) 
+    ? PI*pow(r,2)
+    :  PI*pow(r,2);//sqrt(pow(h,2)-pow(r,2))*h;
     //return atof(a->down->kind.c_str());
     //}
   //fail
@@ -202,16 +204,14 @@ double calcAltura(AST *a, double fac) {
     return max(calcAltura(a->down, fac), calcAltura(a->down->right, fac));
   }
   else if (a->kind == "\\") {
-    add_inclination (-45);
     double aux1 = calcAltura(a->down, fac);
-    ang.pop();
+    ang.push_back(-45);
     double aux2 = calcAltura(a->down->right, fac);
     return max(aux1,aux2);
   }
   else if(a->kind == "/") {
-    add_inclination (45);
     double aux1 = calcAltura(a->down, fac);
-    ang.pop();
+    ang.push_back(45);
     double aux2 = calcAltura(a->down->right, fac);
     return max(aux1,aux2);
   }
@@ -220,7 +220,7 @@ double calcAltura(AST *a, double fac) {
   }
   // else if (a->kind == "[") {
     //usar fac en la altura
-    double res = (ang.top() == 0)
+    double res = (getAng() == 0)
     ? atof(a->down->right->kind.c_str())*fac
     : atof(a->down->right->kind.c_str())*fac*sin(PI/4);
     return res;
@@ -230,6 +230,7 @@ double calcAltura(AST *a, double fac) {
 }
 
 void printa(AST *a) {
+  ang = vector<double>(1,0);
   if (a->kind == "area") {
     cout << calcArea(a->down, 1) << endl; // area que volem cal
   }
@@ -240,7 +241,6 @@ void printa(AST *a) {
 }
 
 int main() {
-  ang.push(0);
   root = NULL;
   ANTLR(fonts(&root), stdin);
   ASTPrint(root);
