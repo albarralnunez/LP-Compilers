@@ -140,12 +140,14 @@ double calcArea(AST *a, double fac) {
         double aux1 = calcArea(a->down, fac);
         ang.push_back(-45);
         double aux2 = calcArea(a->down->right, fac);
+        ang.pop_back();
         return aux1+aux2;
     }
     else if(a->kind == "/") {
         double aux1 = calcArea(a->down, fac);
         ang.push_back(45);
         double aux2 = calcArea(a->down->right, fac);
+        ang.pop_back();
         return aux1+aux2;
     }
     else if(a->kind == "*") {
@@ -153,11 +155,11 @@ double calcArea(AST *a, double fac) {
     }
     // else if (a->kind == "[") {
         //usar fac en la altura
-        double h = atof(a->down->right->kind.c_str());
+        double h = atof(a->down->right->kind.c_str())*fac;
         double r = atof(a->down->kind.c_str());
         return (getAng() == 0) 
             ? PI*pow(r,2)
-            :  PI*pow(r,2);//sqrt(pow(h,2)-pow(r,2))*h;
+            : pow((pow(h,2)-pow(r,2)),1/2)*r;
     //return atof(a->down->kind.c_str());
     //}
     //fail
@@ -175,12 +177,14 @@ double calcAltura(AST *a, double fac) {
         double aux1 = calcAltura(a->down, fac);
         ang.push_back(-45);
         double aux2 = calcAltura(a->down->right, fac);
+        ang.pop_back();
         return max(aux1,aux2);
     }
     else if(a->kind == "/") {
         double aux1 = calcAltura(a->down, fac);
         ang.push_back(45);
         double aux2 = calcAltura(a->down->right, fac);
+        ang.pop_back();
         return max(aux1,aux2);
     }
     else if(a->kind == "*") {
