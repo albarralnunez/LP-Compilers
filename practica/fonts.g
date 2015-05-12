@@ -159,7 +159,7 @@ double calcArea(AST *a, double fac) {
         double r = atof(a->down->kind.c_str());
         return (getAng() == 0) 
             ? PI*pow(r,2)
-            : pow((pow(h,2)-pow(r,2)),1/2)*r;
+            : sqrt(pow(h,2)-pow(r,2))*r;
     //return atof(a->down->kind.c_str());
     //}
     //fail
