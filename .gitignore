@@ -1,7 +1,7 @@
-*.o 
-*.c 
-*.dlg 
-*.h 
+*.o
+*.c
+*.dlg
+*.h
 fonts
 # Compiled Object files
 *.slo
