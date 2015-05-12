@@ -7,6 +7,8 @@ area F5
 area F3 \ [30,40,blau]
 altu [30,50,verd ] / [30,50,blau] \ [30,50,blau] \ [30,100,blau]
 altu [30,50,verd ] / ([30,50,blau] \ ([30,50,blau] \ [30,100,blau]))
+altu [30,90,verd ] \ ([30,60,blau] + [30,60,blau])
+altu 2*[30,10,blau]
 PLAY
 0 on F1
 5 on F2 

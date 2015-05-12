@@ -236,10 +236,10 @@ double calcAltura(AST *a, double fac) {
 void printa(AST *a) {
   ang = vector<double>(1,0);
   if (a->kind == "area") {
-    cout << calcArea(a->down, 1) << endl; // area que volem cal
+    cout << "Area: " << calcArea(a->down, 1) << endl; // area que volem cal
   }
   else if (a->kind == "altu") {
-    cout << calcAltura(a->down, 1) << endl; // altura que volem cal
+    cout << "Altura: " << calcAltura(a->down, 1) << endl; // altura que volem cal
   }
   if (a->right != NULL) printa(a->right);
 }
